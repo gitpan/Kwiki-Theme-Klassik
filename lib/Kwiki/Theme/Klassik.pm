@@ -2,7 +2,8 @@ package Kwiki::Theme::Klassik;
 use strict;
 use warnings;
 use Kwiki::Theme '-Base';
-our $VERSION = '0.10';
+use mixin 'Kwiki::Installer';
+our $VERSION = '0.11';
 
 const theme_id => 'klassik';
 const class_title => 'Klassik Theme';
@@ -32,9 +33,64 @@ under the same terms as Perl itself.
 See http://www.perl.com/perl/misc/Artistic.html
 
 =cut
+__theme/klassik/template/tt2/kwiki_screen.html__
+[%- INCLUDE kwiki_doctype.html %]
+<!-- BEGIN kwiki_screen.html -->
+[% INCLUDE kwiki_begin.html %]
+<div id="group_1">
+<div class="navigation">
+
+<div id="logo_pane">
+<img src="[% logo_image %]" align="center" alt="Kwiki Logo" title="[% site_title %]" />
+</div>
+<br/>
+
+<div id="widgets_pane">
+[% hub.widgets.html %]
+</div>
+</div><!-- navigation -->
+</div><!-- group1 -->
+
+<div id="group_2">
+<div class="navigation">
+<div id="title_pane">
+<h1>
+[% screen_title || self.class_title %]
+</h1>
+</div>
+
+<div id="toolbar_pane">
+[% hub.toolbar.html %]
+[% IF hub.have_plugin('user_name') %]
+[% INCLUDE user_name_title.html %]
+[% END %]
+</div>
+
+<div id="status_pane">
+[% hub.status.html %]
+</div>
+</div><!-- navigation -->
+
+<hr />
+<div id="content_pane">
+[% INCLUDE $content_pane %]
+</div>
+<hr />
+
+<div class="navigation">
+<div id="toolbar_pane_2">
+[% hub.toolbar.html %]
+</div>
+</div><!-- navigation -->
+</div><!-- group2 -->
+[% INCLUDE kwiki_end.html %]
+<!-- END kwiki_screen.html -->
 __theme/klassik/css/kwiki.css__
 #logo_pane {
     text-align: center;
+}
+    
+#logo_pane img {
     width: 90px;
 }
     
@@ -92,69 +148,8 @@ a.private {color: black}
 div.side a { display: list-item; list-style-type: none }
 div.upper-nav { }
 textarea { width: 100% }
-__theme/klassik/css/toolbar.css__
-div.toolbar a:visited {
+div.navigation a:visited {
     color: #d64;
 }
-__theme/klassik/template/tt2/html_begin.html__
-<!-- BEGIN html_begin.html -->
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml11.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>[% site_title %]</title>
-[% FOR css_file = hub.css.files -%]
-  <link rel="stylesheet" type="text/css" href="[% css_file %]" />
-[% END -%]
-[% FOR javascript_file = hub.javascript.files -%]
-  <script type="text/javascript" src="[% javascript_file %]"></script>
-[% END -%]
-  <link rel="shortcut icon" href="" />
-  <link rel="start" href="index.cgi" title="Home" />
-</head>
-<body>
-<!-- END html_begin.html -->
-__theme/klassik/template/tt2/html_end.html__
-<!-- BEGIN html_end.html -->
-</body>
-</html>
-<!-- END html_end.html -->
-__theme/klassik/template/tt2/kwiki_layout_begin.html__
-<!-- BEGIN kwiki_layout_begin.html -->
-[% INCLUDE html_begin.html %]
-<div id="group_1">
-<div id="widgets_pane">
-<div id="logo_image">
-<img src="[% logo_image %]" align="center" alt="Kwiki Logo" title="[% site_title %]" />
-</div>
-<br/>
-[% hub.widgets.html %]
-</div>
-</div>
-
-<div id="group_2">
-<div id="title_pane">
-<h1>[% screen_title || page_id %]</h1>
-</div>
-<div id="toolbar_pane">
-[% hub.toolbar.html %]
-[% IF hub.have_plugin('user_name') %]
-[% INCLUDE user_name_title.html %]
-[% END %]
-</div>
-<div id="content_pane">
-<hr />
-<!-- END kwiki_layout_begin.html -->
-__theme/klassik/template/tt2/kwiki_layout_end.html__
-<!-- BEGIN kwiki_layout_end.html -->
-<hr />
-</div>
-<div id="toolbar_pane_2">
-[% USE toolbar %]
-[% toolbar.html %]
-</div>
-</div>
-[% INCLUDE html_end.html %]
-<!-- END kwiki_layout_end.html -->
 __theme/klassik/css/.htaccess__
 Allow from all
