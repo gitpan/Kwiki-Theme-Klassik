@@ -1,14 +1,11 @@
 package Kwiki::Theme::Klassik;
-use strict;
-use warnings;
-use Kwiki::Theme '-Base';
+use Kwiki::Theme -Base;
 use mixin 'Kwiki::Installer';
-our $VERSION = '0.11';
+our $VERSION = '0.12';
 
 const theme_id => 'klassik';
 const class_title => 'Klassik Theme';
 
-1;
 __DATA__
 
 =head1 NAME 
@@ -34,8 +31,8 @@ See http://www.perl.com/perl/misc/Artistic.html
 
 =cut
 __theme/klassik/template/tt2/kwiki_screen.html__
+
 [%- INCLUDE kwiki_doctype.html %]
-<!-- BEGIN kwiki_screen.html -->
 [% INCLUDE kwiki_begin.html %]
 <div id="group_1">
 <div class="navigation">
@@ -83,8 +80,8 @@ __theme/klassik/template/tt2/kwiki_screen.html__
 </div>
 </div><!-- navigation -->
 </div><!-- group2 -->
-[% INCLUDE kwiki_end.html %]
-<!-- END kwiki_screen.html -->
+[% INCLUDE kwiki_end.html -%]
+
 __theme/klassik/css/kwiki.css__
 #logo_pane {
     text-align: center;
@@ -127,11 +124,6 @@ h1, h2, h3, h4, h5, h6 {
 
 form.edit input { position: absolute; left: 3% }
 textarea { width: auto }
-pre {
-    background-color: #fff;
-    color: black;
-    border: none;
-}
 
 /* ------------------------------------------------------------------- */
 
